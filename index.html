@@ -1,0 +1,1132 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="영상 편집과 디자인을 기반으로 콘텐츠를 기획·촬영·편집하고 마케팅까지 연결하는 정유진의 디자인·마케팅 포트폴리오">
+<meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+<meta name="author" content="정유진">
+<meta name="theme-color" content="#e0b1a8">
+<meta property="og:type" content="website">
+<meta property="og:title" content="정유진 포트폴리오">
+<meta property="og:description" content="영상 편집과 디자인을 기반으로 콘텐츠를 기획·촬영·편집하고 마케팅까지 연결하는 정유진의 디자인·마케팅 포트폴리오">
+<meta property="og:locale" content="ko_KR">
+<title>정유진 포트폴리오</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+KR:wght@300;400;500;700&family=Playfair+Display:ital,wght@1,400;1,500&family=Shadows+Into+Light&family=Permanent+Marker&family=Caveat:wght@600&display=swap">
+<style>
+/* Layout: one index-tab file folder, like the PDF. The tab row sits on the folder; clicking a tab
+   swaps the whole page inside it. Home fits one screen. On phones, image groups become swipe rails.
+   Single paper look in every theme, by choice. */
+:root {
+  --paper: #eeedeb;
+  --ink: #2b2724;
+  --ink-soft: #5d554e;
+  --sheet: #f3f2ef;
+
+  --f-cover: #e0b1a8;
+  --f-profile: #d7c7b3;
+  --f-design: #e9e1ce;
+  --f-editing: #566e84;
+  --f-marketing: #acbdb7;
+  --f-production: #ad5941;
+  --on-dark: #f5f1ea;
+
+  --font-tab: "Playfair Display", "Bodoni 72", Didot, Georgia, serif;
+  --font-hand: "Shadows Into Light", "Segoe Print", "Comic Sans MS", cursive;
+  --font-body: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+
+  --wrap: 1240px;
+  /* type scale: same role = same size on every page */
+  --fs-hand: 1.25rem;   /* Profile handwritten headings */
+  --fs-h: 1rem;         /* section headings (Design / Editing / Marketing / Production) */
+  --fs-body: .92rem;    /* body copy, lists, contact */
+  --fs-sm: .78rem;      /* captions, hints, chips, dates */
+  --gutter: clamp(16px, 4vw, 40px);
+  --radius: 22px;
+  --pad: clamp(20px, 4vw, 52px);
+  --shadow: 0 10px 24px -14px rgba(60,40,30,.45), 0 2px 4px rgba(60,40,30,.12);
+  /* 배경 질감: 종이 질감 이미지를 폴더 색 위에 '곱하기'로 얹어 색상에 맞춰 깔립니다.
+     (img/paper-texture.jpg 를 다른 이미지로 바꾸면 바로 반영됩니다) */
+  --tex: url("img/paper-texture.jpg");
+  --tex-size: cover;
+  --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .3 0 0 0 0 .26 0 0 0 .128 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--paper) var(--noise);
+  color: var(--ink);
+  font: 400 16px/1.7 var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  word-break: keep-all;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid #2f4d6b; outline-offset: 3px; border-radius: 4px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: absolute; left: 12px; top: -60px; background: var(--ink); color: var(--paper); padding: 8px 14px; border-radius: 8px; z-index: 50; }
+.skip:focus { top: 12px; }
+
+/* ---------- app frame ---------- */
+.app {
+  max-width: var(--wrap); margin-inline: auto;
+  padding-inline: var(--gutter);
+  padding-block: 0 clamp(16px, 3vh, 36px);
+  min-height: 100%;
+  display: flex; flex-direction: column;
+}
+
+/* folder colour follows the current page */
+.app { --c: var(--f-cover); --fg: var(--ink); }
+/* 종이 질감 20% 완화: 폴더 색을 20%만 질감 위에 덮어 대비를 줄임 */
+.app { --tex-soft: linear-gradient(color-mix(in srgb, var(--c) 20%, transparent), color-mix(in srgb, var(--c) 20%, transparent)); }
+.app[data-page="profile"]    { --c: var(--f-profile); }
+.app[data-page="design"]     { --c: var(--f-design); }
+.app[data-page="editing"]    { --c: var(--f-editing); --fg: var(--on-dark); }
+.app[data-page="marketing"]  { --c: var(--f-marketing); }
+.app[data-page="production"] { --c: var(--f-production); --fg: var(--on-dark); }
+
+/* ---------- tabs ---------- */
+.tabs {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: var(--paper) var(--noise);
+  padding-top: clamp(12px, 3vh, 34px);
+  margin-inline: calc(var(--gutter) * -1);
+  padding-inline: var(--gutter);
+}
+.tabs__row {
+  display: flex; align-items: flex-end; gap: 3px;
+  padding-inline: clamp(8px, 4.5%, 64px);
+  overflow-x: auto; scrollbar-width: none;
+}
+.tabs__row::-webkit-scrollbar { display: none; }
+/* top edge of the folder: part of the sticky header, so the active tab stays joined while the page scrolls */
+.tabs__lip {
+  position: relative; z-index: 1;
+  height: 14px; margin-top: -1px;
+  background: var(--noise) fixed, var(--tex-soft) fixed, var(--tex) 0 0 / var(--tex-size) fixed, var(--c); background-blend-mode: normal, normal, multiply, normal;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+.tab {
+  --tc: var(--c-tab-fg, var(--ink));
+  position: relative; isolation: isolate;
+  display: inline-flex; align-items: center; justify-content: center;
+  flex: 0 0 auto;
+  min-width: 7.6em;
+  padding: .55em 1.3em .5em;
+  font: italic 500 1.06rem/1.1 var(--font-tab);
+  letter-spacing: .02em;
+  color: var(--tc); text-decoration: none; white-space: nowrap;
+  transform: translateY(5px);
+  opacity: .9;
+  transition: transform .2s ease, opacity .2s ease;
+}
+.tab::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: var(--tab-c) var(--noise);
+  border-radius: 12px 12px 0 0;
+  transform: perspective(16px) rotateX(1.6deg);
+  transform-origin: bottom;
+  box-shadow: 0 -1px 2px rgba(60,40,30,.12);
+}
+.tab:hover { transform: translateY(2px); opacity: 1; }
+.tab[aria-current="page"] { transform: none; opacity: 1; padding-bottom: .75em; z-index: 2; --tab-c: var(--c); }
+/* Active tab: one continuous shape (slanted sides, rounded top, concave feet) cut from the same
+   textured surface as the folder. Background is viewport-fixed on tab, lip and panel, so the grain lines up. */
+.tab[aria-current="page"]::before {
+  left: -12px; right: -12px; bottom: 0;
+  transform: none; box-shadow: none; border-radius: 0;
+  background: var(--noise) fixed, var(--tex-soft) fixed, var(--tex) 0 0 / var(--tex-size) fixed, var(--c); background-blend-mode: normal, normal, multiply, normal;
+  --tab-l: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 44' preserveAspectRatio='none'%3E%3Cpath d='M0 44C8 44 12 40 12 32L15 11Q16.5 0 28 0V44Z'/%3E%3C/svg%3E");
+  --tab-r: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 44' preserveAspectRatio='none'%3E%3Cpath d='M28 44C20 44 16 40 16 32L13 11Q11.5 0 0 0V44Z'/%3E%3C/svg%3E");
+  -webkit-mask: var(--tab-l) left top / 28px 100% no-repeat, var(--tab-r) right top / 28px 100% no-repeat, linear-gradient(#000, #000) center top / calc(100% - 54px) 100% no-repeat;
+          mask: var(--tab-l) left top / 28px 100% no-repeat, var(--tab-r) right top / 28px 100% no-repeat, linear-gradient(#000, #000) center top / calc(100% - 54px) 100% no-repeat;
+}
+.t-profile    { --tab-c: #cdbba4; }
+.t-design     { --tab-c: var(--f-design); }
+.t-editing    { --tab-c: var(--f-editing); --c-tab-fg: #dfe6ee; }
+.t-marketing  { --tab-c: var(--f-marketing); }
+.t-production { --tab-c: var(--f-production); --c-tab-fg: #f6e6df; }
+.t-hello      { --tab-c: var(--f-cover); --c-tab-fg: #fff; margin-left: auto; }
+
+/* ---------- folder panel ---------- */
+.panel {
+  flex: 1;
+  position: relative;
+  background: var(--noise) fixed, var(--tex-soft) fixed, var(--tex) 0 0 / var(--tex-size) fixed, var(--c); background-blend-mode: normal, normal, multiply, normal;
+  color: var(--fg);
+  border-radius: 0 0 var(--radius) var(--radius);
+  box-shadow: var(--shadow);
+  display: flex; flex-direction: column;
+  min-width: 0;
+}
+#main:focus { outline: none; }
+.page { padding: var(--pad); flex: 1; display: flex; flex-direction: column; min-width: 0; }
+.page.is-entering { animation: pageIn .35s ease both; }
+@keyframes pageIn { from { opacity: .001; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* page-to-page footer */
+.pager { margin-top: auto; padding-top: clamp(28px, 4vw, 44px); display: flex; justify-content: space-between; gap: 12px; }
+.pager a {
+  font: italic 500 1rem/1 var(--font-tab); text-decoration: none;
+  padding: .7em 1.1em; border-radius: 999px;
+  background: rgba(255,255,255,.28); border: 1px solid rgba(43,39,36,.14);
+  transition: background-color .2s ease;
+}
+.app[data-page="editing"] .pager a, .app[data-page="production"] .pager a { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.22); }
+.pager a:hover { background: rgba(255,255,255,.5); }
+.app[data-page="editing"] .pager a:hover, .app[data-page="production"] .pager a:hover { background: rgba(255,255,255,.2); }
+.pager .next { margin-left: auto; }
+
+/* embossed white lettering */
+.emboss {
+  color: #fdfbf9;
+  text-shadow: 0 1px 0 rgba(255,255,255,.6), 1px 2px 1px rgba(124,62,52,.28), 2px 4px 6px rgba(124,62,52,.2);
+  font-family: var(--font-body);
+  margin: 0;
+}
+
+/* ---------- home: exactly one screen ---------- */
+body.is-home { overflow: hidden; }
+body.is-home .app { height: 100%; min-height: 0; }
+.cover { display: grid; place-items: center; text-align: center; }
+.cover__title { font-weight: 500; font-size: clamp(2rem, min(7.4vw, 11vh), 5.6rem); letter-spacing: .42em; margin-right: -.42em; line-height: 1.1; }
+.cover__name { font-weight: 400; font-size: clamp(.95rem, min(2.3vw, 3.4vh), 1.7rem); letter-spacing: 1.6em; margin: 1.1em -1.6em 0 0; }
+.cover__lede { margin: clamp(1.2em, 5vh, 2.6em) auto 0; max-width: 34em; color: #6e3f36; font-size: .98rem; }
+.cover__cta {
+  display: inline-flex; align-items: center; gap: .5em; margin-top: clamp(14px, 3vh, 26px);
+  font: italic 500 1.05rem/1 var(--font-tab); color: #6e3f36; text-decoration: none;
+  padding: .75em 1.4em; border-radius: 999px; border: 1px solid rgba(110,63,54,.35); background: rgba(255,255,255,.22);
+}
+.cover__cta:hover { background: rgba(255,255,255,.45); }
+
+/* ---------- profile ---------- */
+/* left: character + contact | middle: expertise + extracurricular | work | right: tall skills note; intro on torn paper below */
+.profile { display: grid; grid-template-columns: minmax(200px, 250px) minmax(0, 1fr) minmax(210px, 240px); gap: 22px clamp(18px, 2.4vw, 30px); align-items: start; }
+#p-profile { --pad: clamp(20px, 3vw, 36px); } /* 프로필 페이지만 안쪽 여백을 줄여 내용이 빽빽하게 */
+.profile__mid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px clamp(18px, 2.4vw, 30px); align-self: stretch; align-content: start; padding-top: 2px; }
+/* 중간 열 목록은 행간을 살짝 넓혀, 커진 사진 옆에서도 아래쪽이 E-mail 줄과 맞도록 함 */
+.profile__mid .dots { gap: .5em; line-height: 1.85; }
+/* polaroid: height fills whatever is left under the character's column, so its bottom lines up with the E-mail / Extracurricular rows */
+.profile__id { display: flex; flex-direction: column; gap: 22px; align-self: start; }
+.profile__id .avatar { flex: none; height: 250px; position: relative; margin: 0; } /* 사진 1.5배 (기존 약 150px → 약 226px 너비) */
+.polaroid { position: absolute; top: 20px; bottom: 0; left: 50%; aspect-ratio: 880 / 800; width: auto; max-width: 100%;
+  transform: translateX(-50%) rotate(-2deg);
+  background: linear-gradient(180deg, #fcfcfb 0%, #f1f1ef 70%, #e9e9e7 100%); border-radius: 3px;
+  box-shadow: 0 12px 18px -10px rgba(40,30,20,.55), 3px 4px 6px rgba(40,30,20,.16); }
+.polaroid__photo { position: absolute; inset: 8% 6.5% 22% 6.5%; background: #f1ecd2; box-shadow: inset 0 0 6px rgba(0,0,0,.3); overflow: hidden; display: grid; place-items: end center; }
+.polaroid__photo > svg { width: 100%; height: 100%; display: block; }
+.polaroid__photo > img { width: 100%; height: 100%; display: block; object-fit: contain; object-position: center bottom; }
+.polaroid__name { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.polaroid__name text { font: 600 80px "Caveat", "Shadows Into Light", cursive; fill: #3a342f; }
+.tape { position: absolute; top: -15px; left: 50%; width: 46%; height: 34px; transform: translateX(-50%) rotate(-2.5deg); z-index: 2;
+  background: var(--noise), rgba(225,209,201,.88); box-shadow: 0 1px 3px rgba(60,40,30,.25);
+  clip-path: polygon(2% 0, 100% 0, 97% 14%, 100% 28%, 97% 43%, 100% 57%, 97% 72%, 100% 86%, 98% 100%, 0 100%, 3% 86%, 0 72%, 3% 57%, 0 43%, 3% 28%, 0 14%); }
+.profile__intro { grid-column: 1 / 3; align-self: stretch; display: flex; align-items: center;
+  background: url("img/note-paper.png") center / 100% 100% no-repeat; padding: 44px 52px 48px; min-height: 186px; position: relative; z-index: 3; margin-right: -48px; } /* 스킬 종이 위로 겹침 */
+.profile .note { grid-column: 3; grid-row: 1 / 3; align-self: stretch; z-index: 2; margin-right: calc(-1 * (var(--pad) + 14px)); } /* 폴더 오른쪽 밖으로 살짝 */
+.hand { font: 400 var(--fs-hand)/1 var(--font-hand); margin: 0 0 .45em; color: var(--ink); letter-spacing: .02em; }
+.contact-line { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: var(--fs-body); margin: 0; }
+/* Contact: 전화번호·메일은 깔끔한 산세리프(Inter)로, 복사 버튼은 작고 은은하게. 위아래 간격도 촘촘하게 */
+/* 사진 왼쪽 선과 맞추도록 안쪽으로 */
+.profile__mid .p-contact { grid-column: 1 / -1; display: grid; grid-auto-flow: column; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: auto auto; gap: 0 clamp(18px, 2.4vw, 30px); align-content: start; }
+.profile__mid .p-contact .hand--mail { margin-top: 0; }
+@media (min-width: 761px) { .profile__mid .p-contact { order: -1; } }
+.p-contact .hand { margin-bottom: .28em; }
+.p-contact .hand--mail { margin-top: .62em; }
+.p-contact .contact-line { font-family: "Inter", var(--font-body); font-size: .88rem; font-weight: 500; letter-spacing: .02em; font-variant-numeric: tabular-nums; gap: 7px; line-height: 1.5; }
+.p-contact .contact-line a { letter-spacing: .03em; }
+.p-contact .copy { font: 500 .68rem/1 var(--font-body); padding: 4px 8px; border-color: transparent; background: rgba(255,255,255,.5); letter-spacing: .02em; }
+.p-contact .copy:hover { background: rgba(255,255,255,.85); }
+#p-profile .pager { margin-top: 0; padding-top: 26px; }
+/* 프로필 폴더는 내용 높이만큼만: 버튼 아래 빈 공간 없음 */
+.app[data-page="profile"] .panel { flex: 0 0 auto; }
+#p-profile { padding-bottom: 22px; } /* 프로필: Home/Design 버튼을 내용 바로 아래로 */
+.contact-line a { white-space: nowrap; text-decoration: none; }
+.contact-line a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.copy { border: 1px solid rgba(43,39,36,.25); background: rgba(255,255,255,.35); border-radius: 999px; font-size: var(--fs-sm); padding: 2px 10px; cursor: pointer; }
+.copy:hover { background: rgba(255,255,255,.7); }
+.dots { list-style: none; margin: 0; padding: 0; display: grid; gap: .3em; font-size: var(--fs-body); line-height: 1.6; }
+.dots li { padding-left: 1em; position: relative; }
+.dots li::before { content: "·"; position: absolute; left: .15em; font-weight: 700; }
+.dots .when { display: block; font-size: var(--fs-sm); color: var(--ink-soft); font-variant-numeric: tabular-nums; letter-spacing: .01em; line-height: 1.4; margin-top: .3em; }
+.torn-wrap { filter: drop-shadow(0 4px 5px rgba(60,40,30,.22)); }
+.torn { background: var(--sheet) var(--noise); color: var(--ink); padding: clamp(28px, 4vw, 44px) clamp(22px, 4vw, 48px); }
+.profile__intro p { margin: 0; font-size: var(--fs-body); line-height: 1.85; color: var(--ink); }
+.note {
+  position: relative; display: flex; flex-direction: column;
+  background: #ececea repeating-linear-gradient(to bottom, transparent 0 31px, #cfd0cf 31px 32px);
+  padding: 34px 18px 24px; transform: rotate(1.2deg);
+  box-shadow: 0 8px 16px -8px rgba(60,40,30,.45);
+}
+.note::before { content: ""; position: absolute; top: -12px; left: 50%; width: 120px; height: 28px; transform: translateX(-50%) rotate(-2deg); background: rgba(163,200,224,.72); }
+.note__in { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.note__title { margin: 0 0 10px; text-align: center; font: 400 1.5rem/1 "Permanent Marker", Impact, "Arial Black", sans-serif; letter-spacing: .04em; color: #1f3a5a; transform: rotate(-2deg); }
+.note__title span { background: linear-gradient(transparent 58%, rgba(224,177,168,.8) 58%); padding: 0 .25em; }
+/* 종이 이미지(img/skills-paper.png)가 있을 때 (데스크톱): 이미지의 투명 여백만큼 바깥으로 그려서 '보이는 종이'가 칸 크기와 같게,
+   이미지가 약 2° 기울어져 있으므로 안쪽 내용(제목+아이콘)도 같은 각도로 기울임 */
+@media (min-width: 1081px) {
+  .note.has-paper { background: none; box-shadow: none; transform: none; padding: 40px 28px 32px; }
+  .note.has-paper::after { content: ""; position: absolute; z-index: -1; inset: -5.4% -8.7% -3.3% -13.5%; background: url("img/skills-paper.png") 0 0 / 100% 100% no-repeat; pointer-events: none; }
+  .note.has-paper::before { top: -8px; transform: translateX(-50%) rotate(-1.5deg); }
+  .note.has-paper .note__in { transform: rotate(2.2deg); }
+}
+.skills { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 84px)); justify-content: space-evenly; gap: 10px 12px; flex: 1; align-content: space-evenly; align-items: start; }
+.skill { display: grid; gap: 7px; justify-items: center; }
+.skill__icon { width: 100%; aspect-ratio: 1; display: block; }
+.skill__icon svg, .skill__icon img { width: 100%; height: 100%; display: block; border-radius: 20%; filter: drop-shadow(0 4px 5px rgba(30,40,60,.3)); }
+.skill .bar { width: 78%; }
+/* 글자+막대 목록: 폰 화면에서만 아이콘 대신 보임 */
+.skills-text { list-style: none; margin: 0; padding: 0; display: none; gap: 14px; flex: 1; align-content: space-evenly; }
+.skills__group { font: 500 var(--fs-sm)/1 var(--font-body); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); }
+.skill-t { display: grid; gap: 5px; }
+.skill-t span { font-size: var(--fs-body); font-weight: 500; }
+.bar { height: 6px; border-radius: 6px; background: #f8f8f6; overflow: hidden; }
+/* bars fill up each time the Profile page is opened (animation restarts when the page is shown) */
+.bar i { display: block; height: 100%; width: var(--v); background: var(--bc, #1f3a5a); border-radius: inherit;
+  animation: barFill 1.3s cubic-bezier(.22,.8,.25,1) both; animation-delay: calc(var(--i, 0) * 90ms + .2s); }
+@keyframes barFill { from { width: 0; } }
+
+/* ---------- shared copy ---------- */
+.kicker { margin: 0; font-size: var(--fs-h); font-weight: 700; line-height: 1.55; }
+.kicker .sep, .prod__card .sep { opacity: .6; padding-inline: .35em; font-weight: 300; }
+.kicker__d { font-weight: 400; }
+.points { list-style: none; margin: .7em 0 0; padding: 0 0 0 .4em; display: grid; gap: .3em; font-size: var(--fs-body); line-height: 1.8; }
+.points li { padding-left: 1.1em; position: relative; }
+.points li::before { content: "·"; position: absolute; left: .2em; font-weight: 700; }
+.block + .block { margin-top: clamp(40px, 6vw, 64px); }
+.block__copy { margin-top: clamp(20px, 3vw, 32px); }
+.block__top { margin: 0 0 clamp(18px, 2.6vw, 28px); }
+.hint { font-size: var(--fs-sm); opacity: .8; margin: .5em 0 0; }
+
+/* ---------- work items ---------- */
+.work { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; position: relative; }
+.work img { width: 100%; height: auto; }
+.work--shadow img { box-shadow: 0 6px 12px -6px rgba(40,30,20,.5); transition: transform .25s ease, box-shadow .25s ease; }
+.work--shadow:hover img { transform: translateY(-3px); box-shadow: 0 14px 22px -10px rgba(40,30,20,.55); }
+.work--frame { background: #fff; padding: 6px; box-shadow: 0 6px 14px -8px rgba(0,0,0,.55); transition: transform .25s ease; }
+.work--frame:hover { transform: translateY(-3px); }
+.work--frame img { height: 100%; object-fit: cover; }
+figure { margin: 0; }
+figcaption.cap { text-align: center; font-size: var(--fs-sm); margin-top: 8px; }
+a.work { text-decoration: none; color: inherit; }
+.work--link { cursor: pointer; }
+.work__badge { position: absolute; top: 6px; right: 6px; width: 22px; height: 22px; border-radius: 50%; background: rgba(255,255,255,.92); color: #2b2724; font-size: 12px; line-height: 22px; text-align: center; box-shadow: 0 1px 4px rgba(0,0,0,.3); pointer-events: none; }
+.ph { display: grid; place-items: center; min-height: 90px; padding: 8px; text-align: center; background: rgba(255,255,255,.45); color: #6b625a; font-size: var(--fs-sm); border: 1px dashed rgba(43,39,36,.3); word-break: break-all; }
+body.is-edit .work[data-link] { outline: 2px dashed rgba(43,39,36,.5); outline-offset: 2px; cursor: pointer; }
+body.is-edit .work[data-link="1"] { outline-style: solid; outline-color: #2e8a57; }
+.editbar { position: fixed; left: 50%; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); z-index: 60; background: #2b2724; color: #f5f1ea; padding: 10px 16px; border-radius: 999px; font-size: var(--fs-sm); display: flex; gap: 12px; align-items: center; box-shadow: 0 6px 20px rgba(0,0,0,.35); max-width: 94vw; }
+.editbar button { border: 1px solid rgba(255,255,255,.4); background: rgba(255,255,255,.12); color: #fff; border-radius: 999px; padding: 4px 12px; font-size: var(--fs-sm); cursor: pointer; white-space: nowrap; }
+
+/* design */
+/* every poster is its own photo; 6 columns x 2 rows, the two tall banners span both rows -> no gaps */
+.posters { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: clamp(8px, 1.2vw, 14px); }
+.posters .work { position: relative; aspect-ratio: 4 / 5; }
+.posters .work img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.posters .ph { position: absolute; inset: 0; }
+.posters .tall-l { grid-column: 1; grid-row: 1 / 3; aspect-ratio: auto; }
+.posters .tall-r { grid-column: 6; grid-row: 1 / 3; aspect-ratio: auto; }
+.thumbs-split { display: grid; grid-template-columns: 1fr 1.25fr; gap: clamp(18px, 3vw, 44px); align-items: start; }
+.grid-thumbs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 16px; }
+.grid-cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; align-items: start; }
+
+/* editing */
+.products { display: grid; grid-template-columns: 437fr 455fr 455fr; gap: clamp(10px, 1.4vw, 18px); }
+.products > :first-child { grid-row: 1 / 3; }
+.compare-grid { columns: 3 260px; column-gap: clamp(14px, 2vw, 24px); }
+.compare-grid > figure { break-inside: avoid; margin-bottom: clamp(14px, 2vw, 24px); }
+.compare { position: relative; overflow: hidden; background: #3d5064; box-shadow: 0 6px 14px -8px rgba(0,0,0,.6); }
+.compare > img { width: 100%; height: auto; user-select: none; pointer-events: none; }
+.compare__after { position: absolute; inset: 0; clip-path: inset(0 0 0 var(--pos, 50%)); transition: clip-path .3s ease; }
+.compare.is-dragging .compare__after, .compare.is-dragging .compare__line { transition: none; }
+.compare__after img { width: 100%; height: 100%; object-fit: cover; user-select: none; pointer-events: none; }
+.compare__line { position: absolute; top: 0; bottom: 0; left: var(--pos, 50%); width: 2px; margin-left: -1px; background: #fff; box-shadow: 0 0 0 1px rgba(0,0,0,.15); pointer-events: none; transition: left .3s ease; }
+.compare__knob { position: absolute; top: 50%; left: 50%; width: 38px; height: 38px; margin: -19px 0 0 -19px; border-radius: 50%; background: #fff; color: var(--f-editing); display: grid; place-items: center; font-size: 15px; box-shadow: 0 3px 8px rgba(0,0,0,.35); }
+.compare input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; touch-action: pan-y; }
+.compare:has(input:focus-visible) { outline: 3px solid #fff; outline-offset: 3px; }
+.compare__tag {
+  position: absolute; bottom: 10px; z-index: 2;
+  font: 500 .68rem/1 var(--font-body); letter-spacing: .12em; text-transform: uppercase;
+  background: rgba(30,40,52,.62); color: #fff; padding: 7px 10px; border-radius: 999px; border: 0; cursor: pointer;
+}
+.compare__tag:hover, .compare__tag[aria-pressed="true"] { background: rgba(255,255,255,.92); color: #22313f; }
+.compare__tag--l { left: 10px; } .compare__tag--r { right: 10px; }
+
+/* marketing: two lined notebook sheets side by side, filling the folder (no empty margins) */
+.mk { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(18px, 2.6vw, 34px); flex: 1; align-items: stretch; --ln: 32px; }
+.mk__card { display: flex; filter: drop-shadow(0 6px 8px rgba(60,40,30,.22)); }
+.mk__card .torn {
+  flex: 1; display: flex; flex-direction: column; position: relative;
+  /* clean ruled lines: one line per text row (32px), plus a soft margin rule on the left */
+  background:
+    linear-gradient(to right, transparent 46px, rgba(196,98,88,.4) 46px 47px, transparent 47px),
+    repeating-linear-gradient(to bottom, transparent 0 calc(var(--ln) - 1px), #d3d4d2 calc(var(--ln) - 1px) var(--ln)),
+    var(--noise), #f6f5f2;
+  border-radius: 4px;
+  padding: var(--ln) clamp(22px, 3vw, 36px) var(--ln) 66px;
+}
+.mk__card .torn::before { content: ""; position: absolute; top: -11px; left: 50%; width: 110px; height: 26px; transform: translateX(-50%) rotate(-2deg); background: rgba(163,200,224,.72); }
+.mk__card:nth-child(2) .torn::before { background: rgba(224,177,168,.78); transform: translateX(-50%) rotate(1.5deg); }
+.mk__card h3 { margin: 0; font-size: var(--fs-h); font-weight: 700; line-height: var(--ln); }
+.mk__card p { margin: 0; font-size: var(--fs-body); line-height: var(--ln); }
+.mk__card p + p { margin-top: var(--ln); }
+.chips { list-style: none; padding: var(--ln) 0 0; margin: auto 0 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.chips li { font-size: var(--fs-sm); line-height: 1.5; padding: 2px 10px; border-radius: 999px; background: rgba(172,189,183,.5); color: #2e3d38; }
+
+/* production */
+.prod { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 2vw, 28px); align-items: stretch; }
+.prod__card { background: #ece9e4 var(--noise); color: var(--ink); border-radius: 10px; padding: 18px clamp(14px, 1.6vw, 22px) 24px; min-width: 0; }
+.prod__card h3 { margin: 0 0 16px; text-align: center; font-size: var(--fs-h); font-weight: 700; line-height: 1.5; }
+.prod__card .sep { opacity: .55; padding-inline: .3em; font-weight: 300; }
+.grid-long { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 16px; }
+.grid-long .work img { border: 3px solid #fff; aspect-ratio: 16/9; object-fit: cover; }
+.grid-short { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px 6px; }
+.grid-short .work img { aspect-ratio: 146/263; object-fit: cover; }
+.grid-news { display: grid; gap: 16px; }
+.prod-copy p { margin: .4em 0 0; padding-left: .9em; max-width: 60em; font-size: var(--fs-body); line-height: 1.8; }
+
+/* thanks */
+.hello { display: grid; place-items: center; text-align: center; gap: 28px; flex: 1; align-content: center; }
+.hello__title { font-weight: 500; font-size: clamp(2.2rem, 6.4vw, 4.6rem); letter-spacing: .38em; margin-right: -.38em; }
+.hello__contact { display: grid; gap: 8px; justify-items: center; color: #5c3029; }
+.hello__contact .copy { border-color: rgba(92,48,41,.35); }
+.hello__foot { font-size: var(--fs-sm); color: #7a4a42; }
+
+/* ---------- mobile rail controls (hidden on desktop) ---------- */
+.rail-ctl { display: none; }
+
+/* lightbox */
+dialog.lb { border: 0; padding: 0; background: transparent; max-width: min(96vw, 1200px); max-height: 94vh; overflow: visible; }
+dialog.lb::backdrop { background: rgba(28,24,22,.86); }
+.lb__fig { display: grid; gap: 10px; justify-items: center; }
+.lb__fig img { max-height: 80vh; width: auto; max-width: 100%; box-shadow: 0 20px 50px rgba(0,0,0,.5); background: #fff; }
+.lb__cap { color: #efe9e2; font-size: .92rem; text-align: center; }
+.lb__btn { position: fixed; top: 50%; transform: translateY(-50%); width: 46px; height: 46px; border-radius: 50%; border: 0; background: rgba(255,255,255,.14); color: #fff; font-size: 22px; cursor: pointer; }
+.lb__btn:hover { background: rgba(255,255,255,.28); }
+.lb__prev { left: 14px; } .lb__next { right: 14px; }
+.lb__close { top: calc(14px + env(safe-area-inset-top, 0px)); right: 14px; transform: none; }
+
+/* ---------- tablet ---------- */
+@media (max-width: 1080px) {
+  .profile { grid-template-columns: minmax(170px, 210px) minmax(0, 1fr); }
+  .profile__intro { grid-column: 1 / -1; }
+  .profile .note { grid-column: 1 / -1; grid-row: auto; }
+  .profile .note, .profile__intro { margin-right: 0; }
+  .skills { grid-template-columns: repeat(auto-fill, 84px); justify-content: center; }
+  .note { transform: none; }
+  .thumbs-split { grid-template-columns: 1fr; }
+  .prod { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .prod__card:last-child { grid-column: 1 / -1; }
+  .prod__card:last-child .grid-news { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* ---------- mobile: swipe rails ---------- */
+@media (max-width: 760px) {
+  body { font-size: 15px; }
+  /* 폰: 탭 글자를 없애고 작은 색 버튼만. 한 줄에 전부 들어옴(스크롤 없음) */
+  .tabs__row { padding-inline: 12px; gap: 6px; overflow: visible; }
+  .tab { min-width: 0; flex: 1 1 0; width: auto; height: 22px; padding: 0; font-size: 0; line-height: 0; letter-spacing: 0; color: transparent; overflow: hidden; }
+  .tab[aria-current="page"] { height: 28px; padding: 0; overflow: visible; }
+  .tab::before { border-radius: 8px 8px 0 0; }
+  .t-hello { margin-left: 0; } /* Production 옆에 빈 공간 없이 6개가 폭을 고르게 나눠 가짐 */
+  .page { padding: 22px 18px; }
+
+  /* phone: character first, then Expertise / Extracurricular / Contact in the middle with breathing room, then the rest */
+  .profile { display: flex; flex-direction: column; align-items: stretch; gap: 0; }
+  .profile__id, .profile__mid { display: contents; }
+  .profile .avatar { order: 1; flex: none; height: 280px; min-height: 0; margin: 8px 0 26px; }
+  .profile__mid .p-contact { display: block; }
+  .profile__mid .p-contact .hand--mail { margin-top: .62em; }
+  .p-contact { order: 2; } .p-expertise { order: 3; } .p-extra { order: 4; }
+  .p-expertise, .p-extra, .p-contact { padding: 24px 4px; border-top: 1px dashed rgba(43,39,36,.28); }
+  .p-extra { border-bottom: 1px dashed rgba(43,39,36,.28); }
+  .profile__intro { order: 6; margin-top: 30px; }
+  .profile .note { order: 7; margin-top: 34px; }
+  /* phone: the torn-paper image drops out and the text sits on a plain, readable card */
+  .profile__intro { background: rgba(255,255,255,.4); border-radius: 12px; padding: 22px 18px; min-height: 0; }
+  .profile__intro p { line-height: 1.85; }
+  .skills { display: none; }
+  .skills-text { display: grid; }
+  .mk { grid-template-columns: 1fr; }
+  .mk__card .torn { padding: var(--ln) 18px var(--ln) 56px; background-position: -10px 0, 0 0, 0 0, 0 0; }
+  .prod, .thumbs-split { grid-template-columns: 1fr; }
+  .prod__card:last-child { grid-column: auto; }
+  .cover__title { letter-spacing: .3em; margin-right: -.3em; font-size: clamp(1.8rem, 9vw, 2.6rem); }
+  .cover__name { letter-spacing: .9em; margin-right: -.9em; }
+  .hello__title { letter-spacing: .24em; margin-right: -.24em; }
+
+  /* every gallery becomes a horizontal, snap-scrolling rail */
+  .rail {
+    display: flex !important; gap: 12px;
+    overflow-x: auto; overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory; scroll-padding-inline: 18px;
+    margin-inline: -18px; padding: 4px 18px 14px;
+    columns: auto; align-items: flex-start; flex-wrap: nowrap;
+    scrollbar-width: none;
+  }
+  .rail::-webkit-scrollbar { display: none; }
+  .rail > * { flex: 0 0 var(--slide, 82%); scroll-snap-align: start; margin: 0 !important; grid-row: auto !important; }
+  .prod__card .rail { margin-inline: -14px; padding-inline: 14px; scroll-padding-inline: 14px; }
+  .posters.rail { --slide: 58%; align-items: center; }
+  .posters.rail .tall-l, .posters.rail .tall-r { --slide: 30%; aspect-ratio: 1 / 2.9; }
+  .grid-thumbs.rail { --slide: 84%; }
+  .grid-cards.rail  { --slide: 64%; }
+  .products.rail    { --slide: 84%; }
+  .products.rail > :first-child { --slide: 72%; }
+  .compare-grid.rail { --slide: 84%; }
+  .grid-long.rail   { --slide: 82%; }
+  .grid-short.rail  { --slide: 46%; }
+  .grid-news.rail   { --slide: 92%; }
+  .compare input { pointer-events: none; }  /* swipe moves the rail; Before/After buttons switch the view */
+
+  .rail-ctl { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 2px; }
+  .rail-ctl button {
+    width: 36px; height: 36px; border-radius: 50%; border: 1px solid currentColor;
+    background: transparent; font-size: 18px; line-height: 1; cursor: pointer; opacity: .8;
+  }
+  .rail-ctl button:disabled { opacity: .25; cursor: default; }
+  .rail-ctl output { font-size: .82rem; font-variant-numeric: tabular-nums; min-width: 4.2em; text-align: center; }
+
+  .lb__btn { top: auto; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); transform: none; }
+  .lb__close { top: calc(14px + env(safe-area-inset-top, 0px)); bottom: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before { transition: none !important; animation: none !important; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">본문 바로가기</a>
+
+<div class="app" id="app" data-page="cover">
+  <header class="tabs">
+    <nav aria-label="포트폴리오 페이지">
+      <div class="tabs__row" id="tabs">
+        <a class="tab t-profile" href="#profile" title="Profile">Profile</a>
+        <a class="tab t-design" href="#design" title="Design">Design</a>
+        <a class="tab t-editing" href="#editing" title="Editing">Editing</a>
+        <a class="tab t-marketing" href="#marketing" title="Marketing">Marketing</a>
+        <a class="tab t-production" href="#production" title="Production">Production</a>
+        <a class="tab t-hello" href="#cover" title="Hello!">Hello!</a>
+      </div>
+    </nav>
+    <div class="tabs__lip" aria-hidden="true"></div>
+  </header>
+
+  <main class="panel" id="main" tabindex="-1">
+
+    <!-- HOME -->
+    <section class="page cover" id="p-cover" data-page="cover" aria-labelledby="coverTitle">
+      <div>
+        <h1 class="emboss cover__title" id="coverTitle">PORTFOLIO</h1>
+        <p class="cover__lede">영상 편집과 디자인을 기반으로 콘텐츠를 기획·촬영·편집하고, 마케팅까지 연결합니다.</p>
+        <a class="cover__cta" href="#profile">Profile 열기 <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+
+    <!-- PROFILE -->
+    <section class="page" id="p-profile" data-page="profile" aria-labelledby="h-profile" hidden>
+      <h2 class="sr-only" id="h-profile">Profile</h2>
+      <div class="profile">
+        <div class="profile__id">
+          <figure class="avatar" aria-label="정유진">
+            <div class="polaroid">
+              <span class="tape" aria-hidden="true"></span>
+              <div class="polaroid__photo"><svg viewBox="0 0 240 250" role="img" aria-label="정유진 캐릭터" xmlns="http://www.w3.org/2000/svg">
+  <g stroke="#231f20" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+    <!-- long wavy hair (back) -->
+    <path d="M120 28C70 28 40 66 42 118C43 142 32 156 40 178C44 190 38 198 46 212C52 204 58 208 62 218L178 218C182 208 188 204 194 212C202 198 196 190 200 178C208 156 197 142 198 118C200 66 170 28 120 28Z" fill="#231f20"/>
+    <!-- neck -->
+    <rect x="107" y="166" width="26" height="34" rx="10" fill="#fbe7d3"/>
+    <!-- shirt -->
+    <path d="M30 262Q38 198 120 192Q202 198 210 262Z" fill="#f4e27a"/>
+    <path d="M104 194Q120 208 136 194" fill="none" stroke-width="3.5"/>
+    <!-- front hair locks -->
+    <path d="M44 176C38 200 48 216 60 232L86 232C72 214 70 196 74 168Z" fill="#231f20"/>
+    <path d="M196 176C202 200 192 216 180 232L154 232C168 214 170 196 166 168Z" fill="#231f20"/>
+    <!-- face -->
+    <ellipse cx="120" cy="130" rx="44" ry="42" fill="#fffaf2"/>
+    <!-- bangs -->
+    <path d="M76 128L76 98Q82 64 120 62Q158 64 164 98L164 128Q156 104 148 112Q140 98 130 112Q120 96 110 112Q100 98 92 112Q84 104 76 128Z" fill="#231f20"/>
+    <path d="M120 60Q114 44 128 42" fill="none"/>
+    <!-- eyes, cheeks, nose, mouth -->
+    <ellipse cx="100" cy="134" rx="4" ry="5.5" fill="#231f20" stroke="none"/>
+    <ellipse cx="140" cy="134" rx="4" ry="5.5" fill="#231f20" stroke="none"/>
+    <circle cx="86" cy="148" r="10" fill="#efb3a5" stroke="none"/>
+    <circle cx="154" cy="148" r="10" fill="#efb3a5" stroke="none"/>
+    <path d="M117 145Q120 148 123 145" fill="none" stroke-width="3"/>
+    <path d="M102 153Q120 175 138 153Z" fill="#fff" stroke-width="3"/>
+    <circle cx="77" cy="153" r="2.6" fill="#231f20" stroke="none"/>
+    <circle cx="163" cy="153" r="2.6" fill="#231f20" stroke="none"/>
+  </g>
+</svg></div>
+              <svg class="polaroid__name" viewBox="0 0 880 800" aria-hidden="true"><text x="440" y="708" text-anchor="middle">Jung Yu Jin</text></svg>
+            </div>
+          </figure>
+        </div>
+        <div class="profile__mid">
+          <div class="p-expertise">
+            <h3 class="hand">Expertise</h3>
+            <ul class="dots">
+              <li>콘텐츠 마케팅 전략 수립</li>
+              <li>SNS 운영</li>
+              <li>인플루언서 &amp; 크리에이터 관리</li>
+              <li>캠페인 기획 및 광고소재 제작</li>
+            </ul>
+          </div>
+          <div class="p-extra">
+            <h3 class="hand">Extracurricular</h3>
+            <ul class="dots">
+              <li><span class="when">2016.05 - 2018.03</span> Tbroad 방송</li>
+              <li>뉴트리라이트 공모전 입상</li>
+              <li><span class="when">2021.2 - 2021.6</span> UX·UI 디자인 수료</li>
+            </ul>
+          </div>
+          <div class="p-contact">
+            <h3 class="hand">Contact</h3>
+            <p class="contact-line"><a href="tel:01065463485">010 6546 3485</a>
+              <button class="copy" type="button" data-copy="010-6546-3485">복사</button></p>
+            <h3 class="hand hand--mail">E-mail</h3>
+            <p class="contact-line"><a href="mailto:gogumaback@naver.com">gogumaback@naver.com</a>
+              <button class="copy" type="button" data-copy="gogumaback@naver.com">복사</button></p>
+          </div>
+        </div>
+        <div class="profile__intro">
+          <p>콘텐츠 제작과 디자인을 기반으로 다양한 프로젝트의 기획과 실행 경험을 쌓아 왔습니다. 기획부터 실행, 운영 및 개선까지 전체 흐름을 이해하고, 목적에 맞는 효율적인 방법을 고민합니다.<br>
+            문제의 본질을 파악하고 정보를 체계적으로 정리하며, 아이디어를 구체화해 실질적인 결과로 연결하는 것을 중요하게 생각합니다. 새로운 환경과 업무에도 유연하게 적응하며 지속적으로 역량을 넓혀 나가고 있습니다.</p>
+        </div>
+        <aside class="note" aria-labelledby="h-skills">
+          <div class="note__in">
+            <h3 class="note__title" id="h-skills"><span>Skills!!</span></h3>
+            <ul class="skills" id="skills"></ul>
+            <ul class="skills-text" id="skillsText"></ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- DESIGN -->
+    <section class="page" id="p-design" data-page="design" aria-labelledby="h-design" hidden>
+      <h2 class="sr-only" id="h-design">Design</h2>
+      <div class="block">
+        <div class="posters" data-gallery="posters" aria-label="포스터·POP·배너 작업물"></div>
+        <div class="block__copy">
+          <h3 class="kicker">디자인<span class="sep">|</span><span class="kicker__d">포스터, POP, 배너, 상세페이지</span></h3>
+          <ul class="points">
+            <li>브랜드 톤과 메시지를 정확히 반영해 일관된 비주얼을 구성합니다.</li>
+            <li>작은 요소까지 완성도를 높여 디테일 중심으로 작업합니다.</li>
+            <li>목적과 상황에 맞는 디자인을 설계해 실제 활용성과 설득력을 높입니다.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="block">
+        <div class="thumbs-split">
+          <div><div class="grid-thumbs" data-gallery="thumbs" aria-label="유튜브 썸네일"></div></div>
+          <div><div class="grid-cards" data-gallery="cards" aria-label="카드뉴스·배너 광고"></div></div>
+        </div>
+        <div class="block__copy">
+          <h3 class="kicker">디자인<span class="sep">|</span><span class="kicker__d">썸네일, 카드뉴스, 배너 광고</span></h3>
+          <ul class="points">
+            <li>브랜드 톤에 맞춘 그래픽 요소와 타이포 스타일로 영상 내 시각 언어를 통일합니다.</li>
+            <li>자막, 아이콘, 레이아웃 등의 세부 요소를 정교하게 조정해 완성도를 높입니다.</li>
+            <li>콘텐츠 목적과 플랫폼 특성에 맞춰 시선 흐름과 메시지 전달력을 강화합니다.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDITING -->
+    <section class="page" id="p-editing" data-page="editing" aria-labelledby="h-editing" hidden>
+      <h2 class="sr-only" id="h-editing">Editing</h2>
+      <div class="block">
+        <h3 class="kicker block__top">제품 촬영·편집<span class="sep">|</span><span class="kicker__d">제품 포토그래피, 소품 연출, 후보정을 결합해 완성도 높은 브랜드 비주얼을 제작합니다.</span></h3>
+        <div class="products" data-gallery="products" aria-label="제품 촬영 작업물"></div>
+      </div>
+      <div class="block">
+        <div class="block__top">
+          <h3 class="kicker">인물 보정<span class="sep">|</span><span class="kicker__d">인물 리터칭과 색보정으로 자연스럽고 완성도 높은 이미지를 구현합니다.</span></h3>
+          <p class="hint" id="compareHint">사진 위를 좌우로 드래그하거나 Before·After를 눌러 보정 전후를 비교해 보세요.</p>
+        </div>
+        <div class="compare-grid" id="compareGrid" aria-label="인물 보정 전후 비교"></div>
+      </div>
+    </section>
+
+    <!-- MARKETING -->
+    <section class="page" id="p-marketing" data-page="marketing" aria-labelledby="h-marketing" hidden>
+      <h2 class="sr-only" id="h-marketing">Marketing</h2>
+      <div class="mk">
+        <article class="mk__card torn-wrap">
+          <div class="torn">
+            <h3>인플루언서 마케팅</h3>
+            <p>가구 브랜드 ‘반트’에서 콘텐츠 제작과 인플루언서 마케팅을 담당했습니다.
+            제품별로 적합한 인플루언서를 모집·관리하고, 캠페인 일정·업로드 현황·성과를 체계적으로 모니터링했습니다.
+            신제품 런칭 시에는 홍보 전략 기획, 캠페인 운영, 제품 자료(PPT) 제작을 진행했으며, 미션 설정과 리워드 관리로 인플루언서 참여를 적극 유도했습니다.
+            또한, 전달받은 콘텐츠를 보관·재편집해 2차 콘텐츠를 제작했습니다.</p>
+            <p>제부도 해상케이블카 홍보 프로젝트에서는 여행·라이프스타일 블로거를 중심으로 협업을 진행했습니다.
+            체험단 모집부터 일정 조율, 콘텐츠 업로드 관리까지 전 과정을 담당하며 브랜드 노출을 극대화했습니다.</p>
+            <ul class="chips" aria-label="관련 키워드">
+              <li>반트</li><li>제부도 해상케이블카</li><li>인플루언서 모집·관리</li><li>체험단 운영</li><li>2차 콘텐츠</li>
+            </ul>
+          </div>
+        </article>
+        <article class="mk__card torn-wrap">
+          <div class="torn">
+            <h3>퍼포먼스 마케팅</h3>
+            <p>제부도 해상케이블에서 디지털 광고 마케팅 운영에 참여했습니다.
+            네이버 GFA, 카카오, 구글, 인스타그램(메타) 광고 소재 제작과
+            성과 모니터링 업무에 참여하며 실무 경험을 쌓았습니다.</p>
+            <p>광고 소재 제작과 성과 분석을 통해 고객 행동과 니즈를 이해하고,
+            네이버 스마트 플레이스 모니터링과 결합해
+            고객 분석 데이터를 광고 전략과 소재 제작에 반영했습니다.</p>
+            <ul class="chips" aria-label="운영 채널">
+              <li>네이버 GFA</li><li>카카오</li><li>구글</li><li>인스타그램(메타)</li><li>네이버 스마트 플레이스</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- PRODUCTION -->
+    <section class="page" id="p-production" data-page="production" aria-labelledby="h-production" hidden>
+      <h2 class="sr-only" id="h-production">Production</h2>
+      <div class="prod">
+        <div class="prod__card">
+          <h3>롱폼 콘텐츠<span class="sep">|</span><span class="kicker__d">촬영·편집</span></h3>
+          <div class="grid-long" data-gallery="long" aria-label="롱폼 콘텐츠"></div>
+        </div>
+        <div class="prod__card">
+          <h3>숏폼 콘텐츠<span class="sep">|</span><span class="kicker__d">촬영·편집</span></h3>
+          <div class="grid-short" data-gallery="short" aria-label="숏폼 콘텐츠"></div>
+        </div>
+        <div class="prod__card">
+          <h3>카드뉴스 및 정보콘텐츠<span class="sep">|</span><span class="kicker__d">기획·제작</span></h3>
+          <div class="grid-news" data-gallery="news" aria-label="카드뉴스 및 정보콘텐츠"></div>
+        </div>
+      </div>
+      <div class="block__copy prod-copy">
+        <h3 class="kicker">콘텐츠 제작<span class="sep">|</span><span class="kicker__d">촬영·기획·편집</span></h3>
+        <p>브랜드의 감도를 살린 영상 톤앤매너를 구축하고, 컬러와 타이포, 모션 그래픽을 조화롭게 활용해 완성도를 높이며,
+        자연스러운 흐름과 리듬감 있는 편집으로 메시지를 효과적으로 전달합니다.</p>
+      </div>
+    </section>
+
+    <!-- THANKS -->
+    <section class="page" id="p-thanks" data-page="thanks" aria-labelledby="h-thanks" hidden>
+      <div class="hello">
+        <h2 class="emboss hello__title" id="h-thanks">감사합니다!</h2>
+        <div class="hello__contact">
+          <p class="contact-line"><a href="tel:01065463485">010-6546-3485</a>
+            <button class="copy" type="button" data-copy="010-6546-3485">복사</button></p>
+          <p class="contact-line"><a href="mailto:gogumaback@naver.com">gogumaback@naver.com</a>
+            <button class="copy" type="button" data-copy="gogumaback@naver.com">복사</button></p>
+        </div>
+        <p class="hello__foot">© 정유진 · Design · Editing · Marketing · Production</p>
+      </div>
+    </section>
+  </main>
+</div>
+
+<dialog class="lb" id="lb" aria-label="작업물 크게 보기">
+  <figure class="lb__fig">
+    <img id="lbImg" alt="">
+    <figcaption class="lb__cap" id="lbCap"></figcaption>
+  </figure>
+  <button class="lb__btn lb__prev" id="lbPrev" type="button" aria-label="이전 작업물">‹</button>
+  <button class="lb__btn lb__next" id="lbNext" type="button" aria-label="다음 작업물">›</button>
+  <button class="lb__btn lb__close" id="lbClose" type="button" aria-label="닫기">×</button>
+</dialog>
+
+<script>
+/* ============ content data (replace images/labels here) ============ */
+const IMG = "img/";
+const PAGES = [
+  { id: "cover", label: "Home" },
+  { id: "profile", label: "Profile" },
+  { id: "design", label: "Design" },
+  { id: "editing", label: "Editing" },
+  { id: "marketing", label: "Marketing" },
+  { id: "production", label: "Production" },
+  { id: "thanks", label: "Hello!" },
+];
+const DATA = {
+  skillGroups: [
+    { group: "Design · Video", keys: ["ps", "ai", "pr", "ae"] },
+    { group: "Office", keys: ["word", "ppt", "excel"] },
+  ],
+  skills: [
+    { name: "Photoshop", key: "ps", v: 95, c: "#1f4d7a" },
+    { name: "Word", key: "word", v: 85, c: "#1f4f8f" },
+    { name: "Illustrator", key: "ai", v: 70, c: "#6b2a12" },
+    { name: "PowerPoint", key: "ppt", v: 85, c: "#c2513a" },
+    { name: "Premiere Pro", key: "pr", v: 85, c: "#2c2f7a" },
+    { name: "Excel", key: "excel", v: 65, c: "#2e8a57" },
+    { name: "After Effects", key: "ae", v: 40, c: "#26206b" },
+  ],
+  /* Design 포스터: 작품 1개 = 파일 1개. 아래 d-01~d-08.jpg 로 모음 이미지를 하나씩 잘라 img 폴더에 넣어주세요 */
+  posters: [
+    { src: "d-banner-chuseok.jpg", w: 190, h: 578, cls: "tall-l", alt: "추석 행사 안내 세로 배너" },
+    { src: "d-01.jpg", w: 400, h: 500, alt: "디자인 작업물: RYAN 드림콧" },
+    { src: "d-02.jpg", w: 400, h: 500, alt: "디자인 작업물: 베이비하우스 이벤트" },
+    { src: "d-03.jpg", w: 400, h: 500, alt: "디자인 작업물: 잉글레시나 유모차" },
+    { src: "d-04.jpg", w: 400, h: 500, alt: "디자인 작업물: 수능국어 학원" },
+    { src: "d-05.jpg", w: 400, h: 500, alt: "디자인 작업물: 아구찜 리뷰 이벤트" },
+    { src: "d-06.jpg", w: 400, h: 500, alt: "디자인 작업물: 스쿳앤라이드 세트" },
+    { src: "d-07.jpg", w: 400, h: 500, alt: "디자인 작업물: 1석2조 프로젝트" },
+    { src: "d-08.jpg", w: 400, h: 500, alt: "디자인 작업물: 국어 논술 학원" },
+    { src: "d-banner-mission.jpg", w: 208, h: 580, cls: "tall-r", alt: "케이블카 연계 미션 체험 안내 세로 배너" },
+  ],
+  thumbs: [
+    { src: "t-postpartum.jpg", w: 334, h: 162, alt: "유튜브 썸네일: 산후조리원 고를 때 이거 모르면 손해" },
+    { src: "t-ryan.jpg", w: 334, h: 162, alt: "유튜브 썸네일: 쏟아지는 갓성비 리안솔로 2023" },
+    { src: "t-soonsung.jpg", w: 334, h: 162, alt: "유튜브 썸네일: 순성 듀클 핀 신규컬러 소개" },
+    { src: "t-cybex.jpg", w: 334, h: 162, alt: "유튜브 썸네일: 손가락 하나로 유모차 든 거 맞아요" },
+    { src: "t-bugaboo.jpg", w: 334, h: 162, alt: "유튜브 썸네일: 부가부 폭스3 색상조합과 액세서리 추천" },
+    { src: "t-stokke.jpg", w: 334, h: 162, alt: "유튜브 썸네일: 스토케 리마스 & 플렉스" },
+  ],
+  cards: [
+    ["b-01", "육아용품 이벤트 카드"], ["b-02", "유모차 사전예약 배너"], ["b-03", "orbitG5 블랙라벨 배너"], ["b-04", "미니스트라이크 장바구니 추가증정 배너"],
+    ["b-05", "팔로우 이벤트 카드"], ["b-06", "섬에서 즐기는 어린이축제 카드뉴스"], ["b-07", "굿바이 장마 50% 할인 배너"], ["b-08", "가을여행지 제부도 카드뉴스"],
+    ["b-09", "케이블카 할인 이벤트 배너"], ["b-10", "VANTE ROOM 배너"], ["b-11", "Big Smile Day 33% 할인 배너", 212], ["b-12", "11월 노을달력 배너", 212],
+  ].map(([s, alt, h]) => ({ src: s + ".jpg", w: 170, h: h || 169, alt })),
+  products: [
+    { src: "p-brandy.jpg", w: 437, h: 622, alt: "제품 촬영: 브랜디 병과 잔" },
+    { src: "p-wine.jpg", w: 455, h: 293, alt: "제품 촬영: 와인을 따르는 순간" },
+    { src: "p-coffee.jpg", w: 455, h: 293, alt: "제품 촬영: 원두 위 캔커피" },
+    { src: "p-candle.jpg", w: 455, h: 294, alt: "제품 촬영: 캔들과 장미 소품 연출" },
+    { src: "p-perfume.jpg", w: 455, h: 294, alt: "제품 촬영: 솔잎과 향수병" },
+  ],
+  retouch: [
+    ["r1", 412, 708, "야외 테라스 웨딩 커플"], ["r2", 232, 351, "블랙 배경 웨딩 커플"],
+    ["r3", 232, 350, "민트 배경 웨딩 커플"], ["r4", 434, 734, "핑크 벽 앞 신부"],
+    ["r5", 550, 365, "밤 골목 웨딩 커플"], ["r6", 529, 682, "화이트 스튜디오 웨딩 커플"],
+    ["r7", 407, 339, "숲속 커플 스냅"],
+  ],
+  long: [
+    { src: "t-stokke.jpg", w: 334, h: 162, cap: "제품소개", alt: "스토케 제품소개 영상" },
+    { src: "l-playlist.jpg", w: 187, h: 99, cap: "플레이리스트", alt: "플레이리스트 영상" },
+    { src: "t-cybex.jpg", w: 334, h: 162, cap: "제품소개", alt: "싸이벡스 제품소개 영상" },
+    { src: "l-guide1.jpg", w: 187, h: 99, cap: "사용안내", alt: "VANTE 사용안내 영상" },
+    { src: "t-postpartum.jpg", w: 334, h: 162, cap: "인터뷰", alt: "산후조리원 인터뷰 영상" },
+    { src: "l-guide2.jpg", w: 187, h: 99, cap: "사용안내", alt: "VANTE 모듈 패브릭 소파 패드 사용안내 영상" },
+    { src: "t-bugaboo.jpg", w: 334, h: 162, cap: "라이브 방송", alt: "부가부 폭스3 라이브 방송" },
+    { src: "l-vlog.jpg", w: 187, h: 99, cap: "V-LOG", alt: "Vanteroom project 브이로그" },
+  ],
+  short: [
+    ["s-timelapse", "타임랩스"], ["s-ad", "광고소재"], ["s-interview", "인터뷰"],
+    ["s-brandfilm", "브랜드 영상"], ["s-product", "제품소개"], ["s-highlight", "하이라이트"],
+  ].map(([s, cap]) => ({ src: s + ".jpg", w: 146, h: 263, cap, alt: "숏폼 " + cap })),
+  news: [
+    { src: "cn-jeju.jpg", w: 430, h: 181, alt: "카드뉴스: 가을여행지 제부도 여행 필수코스" },
+    { src: "cn-festival.jpg", w: 430, h: 190, alt: "카드뉴스: 섬에서 즐기는 어린이축제" },
+    { src: "cn-insurance.jpg", w: 430, h: 192, alt: "정보콘텐츠: 보험 부당 다수가입 피해구제 요청" },
+  ],
+};
+const GALLERY_STYLE = { products: "work--frame" };
+
+/* ===== Production 링크 등록 =====
+   사진을 클릭하면 새 창으로 열릴 주소를 "" 안에 붙여넣으세요 (예: "https://youtu.be/...").
+   비워두면(“”) 링크 없이 기존처럼 크게 보기가 열립니다.
+   주소창 뒤에 ?edit 를 붙여 열면(index.html?edit) 화면에서 사진을 눌러 바로 입력·테스트할 수 있고,
+   하단 [링크 코드 복사] 버튼으로 아래 LINKS 를 통째로 복사해 이 자리에 붙여넣으면 됩니다. */
+const LINKS = {
+  /* 롱폼 */
+  "t-stokke.jpg": "", "l-playlist.jpg": "", "t-cybex.jpg": "", "l-guide1.jpg": "",
+  "t-postpartum.jpg": "", "l-guide2.jpg": "", "t-bugaboo.jpg": "", "l-vlog.jpg": "",
+  /* 숏폼 */
+  "s-timelapse.jpg": "", "s-ad.jpg": "", "s-interview.jpg": "",
+  "s-brandfilm.jpg": "", "s-product.jpg": "", "s-highlight.jpg": "",
+  /* 카드뉴스·정보콘텐츠 */
+  "cn-jeju.jpg": "", "cn-festival.jpg": "", "cn-insurance.jpg": "",
+};
+const LINK_GALLERIES = new Set(["long", "short", "news"]);
+const EDIT = new URLSearchParams(location.search).has("edit");
+let STORED = {};
+try { STORED = JSON.parse(localStorage.getItem("pf-links") || "{}"); } catch (_) {}
+const linkOf = src => ((EDIT && src in STORED) ? STORED[src] : LINKS[src]) || "";
+
+/* ============ components ============ */
+const LB = [];
+
+function editLink(btn, item) {
+  const v = prompt("이 사진을 눌렀을 때 열릴 링크 주소 (비우면 삭제)", linkOf(item.src));
+  if (v === null) return;
+  STORED[item.src] = v.trim();
+  try { localStorage.setItem("pf-links", JSON.stringify(STORED)); } catch (_) {}
+  btn.dataset.link = STORED[item.src] ? "1" : "0";
+}
+
+function workItem(item, style, linkable) {
+  const idx = LB.push(item) - 1;
+  const url = linkable && !EDIT ? linkOf(item.src).trim() : "";
+  const btn = document.createElement(url ? "a" : "button");
+  if (url) { btn.href = url; btn.target = "_blank"; btn.rel = "noopener noreferrer"; } else btn.type = "button";
+  btn.className = "work " + (style || "work--shadow") + (url ? " work--link" : "") + (item.cls ? " " + item.cls : "");
+  btn.setAttribute("aria-label", item.alt + (url ? " 링크 열기 (새 창)" : " 크게 보기"));
+  btn.innerHTML = `<img src="${IMG + item.src}" width="${item.w}" height="${item.h}" alt="${item.alt}" loading="lazy" decoding="async">` + (url ? '<span class="work__badge" aria-hidden="true">↗</span>' : "");
+  const im = btn.querySelector("img");
+  im.addEventListener("error", () => { const d = document.createElement("div"); d.className = "ph"; d.textContent = item.src; im.replaceWith(d); }, { once: true });
+  if (linkable && EDIT) btn.dataset.link = linkOf(item.src) ? "1" : "0";
+  if (!url) btn.addEventListener("click", () => (linkable && EDIT) ? editLink(btn, item) : openLightbox(idx));
+  if (!item.cap) return btn;
+  const fig = document.createElement("figure");
+  fig.append(btn);
+  fig.insertAdjacentHTML("beforeend", `<figcaption class="cap">${item.cap}</figcaption>`);
+  return fig;
+}
+
+function renderGalleries() {
+  document.querySelectorAll("[data-gallery]").forEach(host => {
+    const name = host.dataset.gallery;
+    DATA[name].forEach(item => host.append(workItem(item, GALLERY_STYLE[name], LINK_GALLERIES.has(name))));
+  });
+}
+
+/* 스킬 아이콘: 기본은 아래의 그림(SVG)이 들어가고, img 폴더에 skill-ps.png / skill-word.png / skill-ai.png /
+   skill-ppt.png / skill-pr.png / skill-excel.png / skill-ae.png 를 넣으면 그 이미지로 자동 교체됩니다. */
+const adobe = (t, bg, fg) => `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" rx="20" fill="${bg}"/><text x="50" y="67" text-anchor="middle" font-family="'Noto Sans KR',Arial,sans-serif" font-weight="700" font-size="52" fill="${fg}">${t}</text></svg>`;
+const office = (t, page, stripe, badge, fg = "#fff") => `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" rx="20" fill="#fff"/><rect x="34" y="16" width="50" height="68" rx="6" fill="${page}"/><g fill="${stripe}"><rect x="52" y="28" width="24" height="8" rx="2"/><rect x="52" y="42" width="24" height="8" rx="2"/><rect x="52" y="56" width="24" height="8" rx="2"/><rect x="52" y="70" width="24" height="8" rx="2"/></g><rect x="14" y="30" width="42" height="42" rx="7" fill="${badge}"/><text x="35" y="62" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="30" fill="${fg}">${t}</text></svg>`;
+const ICONS = {
+  ps: adobe("Ps", "#16365a", "#4aa3f5"),
+  ai: adobe("Ai", "#2e0a00", "#ffa31a"),
+  pr: adobe("Pr", "#1c2170", "#a9a9ff"),
+  ae: adobe("Ae", "#0c0a52", "#a9a9ff"),
+  word: office("W", "#2b7cd3", "#a9cdf2", "#185abd"),
+  excel: office("X", "#33c481", "#a8e6c8", "#107c41"),
+  ppt: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" rx="20" fill="#fff"/><circle cx="58" cy="50" r="31" fill="#ff9d7a"/><path d="M58 50V19A31 31 0 0 1 89 50Z" fill="#d24726"/><rect x="14" y="30" width="42" height="42" rx="7" fill="#c43e1c"/><text x="35" y="62" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="30" fill="#fff">P</text></svg>`,
+};
+
+function renderSkills() {
+  let n = 0;
+  const host = document.getElementById("skills");
+  host.innerHTML = DATA.skills.map(s =>
+    `<li class="skill"><div class="skill__icon" data-key="${s.key}" role="img" aria-label="${s.name}">${ICONS[s.key] || ""}</div><div class="bar" role="img" aria-label="${s.name} 숙련도 ${s.v}%"><i style="--v:${s.v}%;--bc:${s.c};--i:${n++}"></i></div></li>`
+  ).join("");
+  document.getElementById("skillsText").innerHTML = DATA.skillGroups.map(g =>
+    `<li class="skills__group">${g.group}</li>` + g.keys.map(k => {
+      const s = DATA.skills.find(x => x.key === k);
+      return `<li class="skill-t"><span>${s.name}</span><div class="bar" role="img" aria-label="${s.name} 숙련도 ${s.v}%"><i style="--v:${s.v}%;--bc:${s.c};--i:${n++}"></i></div></li>`;
+    }).join("")
+  ).join("");
+  /* 스킬 종이 이미지: img/skills-paper.png 가 있으면 메모지 배경을 그 이미지로 교체 */
+  const paper = new Image();
+  paper.onload = () => document.querySelector(".note").classList.add("has-paper");
+  paper.src = "img/skills-paper.png";
+  host.querySelectorAll(".skill__icon").forEach(box => {
+    const im = new Image();
+    im.alt = "";
+    im.onload = () => box.replaceChildren(im);
+    im.src = `img/skill-${box.dataset.key}.png`;
+  });
+}
+
+function renderCompare() {
+  const grid = document.getElementById("compareGrid");
+  DATA.retouch.forEach(([key, w, h, label], i) => {
+    const fig = document.createElement("figure");
+    fig.innerHTML = `
+      <div class="compare" style="--pos:50%">
+        <img src="${IMG + key}-a.jpg" width="${w}" height="${h}" alt="${label} 보정 전" loading="lazy" decoding="async">
+        <div class="compare__after"><img src="${IMG + key}-b.jpg" width="${w}" height="${h}" alt="${label} 보정 후" loading="lazy" decoding="async"></div>
+        <span class="compare__line"><span class="compare__knob" aria-hidden="true">⇆</span></span>
+        <input type="range" min="0" max="100" value="50" id="cmp-${i}" aria-label="${label} 보정 전후 비교" aria-describedby="compareHint">
+        <button type="button" class="compare__tag compare__tag--l" data-pos="100" aria-pressed="false">Before</button>
+        <button type="button" class="compare__tag compare__tag--r" data-pos="0" aria-pressed="false">After</button>
+      </div>`;
+    const box = fig.firstElementChild, input = box.querySelector("input");
+    const tags = box.querySelectorAll(".compare__tag");
+    const set = (v, animate) => {
+      box.classList.toggle("is-dragging", !animate);
+      box.style.setProperty("--pos", v + "%");
+      input.value = v;
+      tags.forEach(t => t.setAttribute("aria-pressed", String(+t.dataset.pos === +v)));
+    };
+    input.addEventListener("input", () => set(input.value, false));
+    tags.forEach(t => t.addEventListener("click", () => {
+      const v = +t.dataset.pos;
+      set(+input.value === v ? 50 : v, true);   // tap again to return to the split view
+    }));
+    grid.append(fig);
+  });
+}
+
+/* torn paper edges via a seeded jagged clip-path */
+function tear(el, sides, seed) {
+  let s = seed;
+  const rnd = () => ((s = (s * 9301 + 49297) % 233280) / 233280);
+  const amp = 9, step = 1.4, pts = [];
+  const jag = () => (rnd() * amp).toFixed(1) + "px";
+  const has = k => sides.includes(k);
+  if (has("top")) for (let x = 0; x <= 100; x += step) pts.push(`${x}% ${jag()}`);
+  else pts.push("0 0", "100% 0");
+  if (has("right")) for (let y = 0; y <= 100; y += step * 1.8) pts.push(`calc(100% - ${jag()} - ${(Math.sin(y / 7) * 6 + 6).toFixed(1)}px) ${y}%`);
+  if (has("bottom")) for (let x = 100; x >= 0; x -= step) pts.push(`${x}% calc(100% - ${jag()})`);
+  else pts.push("100% 100%", "0 100%");
+  if (has("left")) for (let y = 100; y >= 0; y -= step * 1.8) pts.push(`calc(${jag()} + ${(Math.sin(y / 7) * 6 + 6).toFixed(1)}px) ${y}%`);
+  el.style.clipPath = `polygon(${pts.join(",")})`;
+}
+
+/* ============ mobile swipe rails ============ */
+const MOBILE = window.matchMedia("(max-width: 760px)");
+
+function initRails() {
+  const hosts = [...document.querySelectorAll("[data-gallery], #compareGrid")];
+  hosts.forEach(rail => {
+    rail.classList.add("rail");
+    const ctl = document.createElement("div");
+    ctl.className = "rail-ctl";
+    ctl.innerHTML = `<button type="button" class="prev" aria-label="이전 사진">‹</button><output aria-live="polite">1 / 1</output><button type="button" class="next" aria-label="다음 사진">›</button>`;
+    rail.after(ctl);
+    const out = ctl.querySelector("output"), prev = ctl.querySelector(".prev"), next = ctl.querySelector(".next");
+    const slides = () => [...rail.children];
+    const current = () => {
+      const x = rail.scrollLeft, list = slides();
+      let best = 0, d = Infinity;
+      list.forEach((el, i) => { const dd = Math.abs(el.offsetLeft - rail.offsetLeft - parseFloat(getComputedStyle(rail).paddingLeft) - x); if (dd < d) { d = dd; best = i; } });
+      const atEnd = x + rail.clientWidth >= rail.scrollWidth - 4;
+      return atEnd ? list.length - 1 : best;
+    };
+    const update = () => {
+      const n = slides().length, i = current();
+      out.value = `${i + 1} / ${n}`;
+      prev.disabled = i === 0 && rail.scrollLeft < 4;
+      next.disabled = rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 4;
+    };
+    const go = dir => {
+      const list = slides(), i = Math.max(0, Math.min(list.length - 1, current() + dir));
+      const pad = parseFloat(getComputedStyle(rail).paddingLeft);
+      rail.scrollTo({ left: list[i].offsetLeft - rail.offsetLeft - pad, behavior: "smooth" });
+    };
+    prev.addEventListener("click", () => go(-1));
+    next.addEventListener("click", () => go(1));
+    let t; rail.addEventListener("scroll", () => { clearTimeout(t); t = setTimeout(update, 60); }, { passive: true });
+    rail._update = update;
+  });
+}
+function refreshRails(scope) {
+  (scope || document).querySelectorAll(".rail").forEach(r => { r.scrollLeft = 0; r._update && r._update(); });
+}
+
+/* ============ page switching ============ */
+const app = document.getElementById("app");
+const tabs = [...document.querySelectorAll("#tabs .tab")];
+
+function buildPagers() {
+  PAGES.forEach((p, i) => {
+    if (p.id === "cover") return;
+    const sec = document.getElementById("p-" + p.id);
+    const prev = PAGES[i - 1], next = PAGES[i + 1];
+    const nav = document.createElement("nav");
+    nav.className = "pager";
+    nav.setAttribute("aria-label", "이전·다음 페이지");
+    nav.innerHTML =
+      (prev ? `<a class="prev" href="#${prev.id}">← ${prev.label}</a>` : "") +
+      (next ? `<a class="next" href="#${next.id}">${next.label} →</a>` : `<a class="next" href="#cover">Home →</a>`);
+    sec.append(nav);
+  });
+}
+
+function show(id, focus) {
+  if (!PAGES.some(p => p.id === id)) id = "cover";
+  document.querySelectorAll(".page").forEach(sec => {
+    const on = sec.dataset.page === id;
+    sec.hidden = !on;
+    sec.classList.toggle("is-entering", on);
+  });
+  app.dataset.page = id;
+  document.body.classList.toggle("is-home", id === "cover");
+  const tabKey = (id === "cover" || id === "thanks") ? "cover" : id;
+  tabs.forEach(t => t.hash === "#" + tabKey ? t.setAttribute("aria-current", "page") : t.removeAttribute("aria-current"));
+  const active = tabs.find(t => t.hash === "#" + tabKey);
+  const row = document.getElementById("tabs");
+  if (id === "cover") row.scrollTo({ left: 0 });
+  else if (active && (active.offsetLeft < row.scrollLeft || active.offsetLeft + active.offsetWidth > row.scrollLeft + row.clientWidth)) {
+    row.scrollTo({ left: active.offsetLeft - 12, behavior: "smooth" });
+  }
+  window.scrollTo(0, 0);
+  const sec = document.getElementById("p-" + id);
+  requestAnimationFrame(() => refreshRails(sec));
+  if (focus) document.getElementById("main").focus({ preventScroll: true });
+}
+
+function route(focus) { show(decodeURIComponent(location.hash.slice(1)) || "cover", focus); }
+
+/* lightbox */
+const lb = document.getElementById("lb"), lbImg = document.getElementById("lbImg"), lbCap = document.getElementById("lbCap");
+let lbIndex = 0;
+function showLb(i) {
+  lbIndex = (i + LB.length) % LB.length;
+  const it = LB[lbIndex];
+  lbImg.src = IMG + it.src; lbImg.alt = it.alt;
+  lbCap.textContent = it.alt;
+}
+function openLightbox(i) { showLb(i); if (!lb.open) lb.showModal(); }
+document.getElementById("lbPrev").onclick = () => showLb(lbIndex - 1);
+document.getElementById("lbNext").onclick = () => showLb(lbIndex + 1);
+document.getElementById("lbClose").onclick = () => lb.close();
+lb.addEventListener("click", e => { if (e.target === lb) lb.close(); });
+lb.addEventListener("keydown", e => {
+  if (e.key === "ArrowLeft") showLb(lbIndex - 1);
+  if (e.key === "ArrowRight") showLb(lbIndex + 1);
+});
+
+/* copy buttons */
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-copy]");
+  if (!b) return;
+  const text = b.dataset.copy, reset = () => setTimeout(() => (b.textContent = "복사"), 1600);
+  const done = () => { b.textContent = "복사됨"; reset(); };
+  const fallback = () => {
+    const r = document.createRange(); r.selectNodeContents(b.previousElementSibling);
+    const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); b.textContent = "선택됨"; reset();
+  };
+  try { navigator.clipboard.writeText(text).then(done, fallback); } catch (_) { fallback(); }
+});
+
+/* ============ Profile 캐릭터 이미지 ============
+   img 폴더에 character.png (또는 .jpg / .webp / .svg) 를 넣으면 자동으로 사진틀 안에 들어갑니다.
+   파일이 없으면 기본으로 들어있는 그림이 보입니다. 다른 이름을 쓰려면 아래 목록에 추가하세요. */
+(function () {
+  const box = document.querySelector(".polaroid__photo");
+  const list = ["img/character.png", "img/character.jpg", "img/character.jpeg", "img/character.webp", "img/character.svg"];
+  (function next(i) {
+    if (!box || i >= list.length) return;
+    const im = new Image();
+    im.alt = "정유진 캐릭터";
+    im.onload = () => box.replaceChildren(im);
+    im.onerror = () => next(i + 1);
+    im.src = list[i];
+  })(0);
+})();
+
+/* ============ boot ============ */
+if (EDIT) {
+  document.body.classList.add("is-edit");
+  const bar = document.createElement("div");
+  bar.className = "editbar";
+  bar.innerHTML = '<span>링크 편집 모드 · Production 사진을 눌러 주소 입력</span><button type="button">링크 코드 복사</button>';
+  bar.querySelector("button").onclick = e => {
+    const all = { ...LINKS, ...STORED };
+    const code = "const LINKS = " + JSON.stringify(all, null, 2) + ";";
+    navigator.clipboard.writeText(code).then(() => { e.target.textContent = "복사됨!"; setTimeout(() => (e.target.textContent = "링크 코드 복사"), 1600); }, () => prompt("복사해서 붙여넣으세요", code));
+  };
+  document.body.append(bar);
+}
+renderSkills();
+renderGalleries();
+renderCompare();
+document.querySelectorAll("[data-torn]").forEach((el, i) => tear(el, el.dataset.torn.split(","), 17 + i * 31));
+buildPagers();
+initRails();
+window.addEventListener("hashchange", () => route(true));
+MOBILE.addEventListener("change", () => refreshRails());
+route(false);
+</script>
+</body>
+</html>
